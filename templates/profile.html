@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الشخصية</title>
+    <link rel="stylesheet" href="{% static 'style/profile.css' %}">
+</head>
+<body>
+    
+    <div class="container">
+        
+        <div class="up">
+            <h2>{{c_user.full_name}}</h2>
+
+            <div>
+                <p>الرصيد الحالي</p>
+                <p class="balance">${{c_user.balance}}</p>
+            </div>
+        </div>
+
+        <div class="btns">
+            <input type="number" placeholder="أدخل المبلغ">
+            <button class="create">انشاء رابط دفع</button>
+            <button class="copy" data-url="URL_HERE" id="copy">نسخ الرابط</button>
+            <button class="logout" onclick="window.location.href = '/logout/' ">تسجيل الخروج</button>
+            
+        </div>
+
+        <div class="table">
+            <div class="main">
+                <p>اسم المستخدم</p>
+                <p>البريد الالكتروني</p>
+                <p>المبلغ</p>
+                <p>تاريخ الدفع</p>
+            </div>
+            <div class="info success">
+                <p>رضوان جابر</p>
+                <p>radwan@gmail.com</p>
+                <p>100$</p>
+                <p>22-9-2020</p>
+            </div>
+            <div class="info fail">
+                <p>رضوان جابر</p>
+                <p>radwan@gmail.com</p>
+                <p>100$</p>
+                <p>22-9-2020</p>
+            </div>
+            
+
+        </div>
+
+    </div>
+
+</body>
+</html>
