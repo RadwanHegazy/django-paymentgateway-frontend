@@ -9,19 +9,25 @@
 </head>
 <body>
 
-    <div class="container">
-        <h2>اتمام عميلة سحب مبلغ 100$</h2>
-        <input type="text" placeholder="الاسم بالكامل">
-        <input type="email" placeholder="البريد الالكنروني">
-        <input type="text" placeholder="رقم البطاقة">    
-        <input type="text" placeholder="رقم cvc">
-        <input type="text" placeholder="تاريخ انتهاء البطاقة">
+    {% for m in messages %}
+        <script>alert("{{m}}")</script>
+    {% endfor %}
+
+    <form class="container" method="POST">
+        <h2>اتمام عميلة سحب مبلغ {{amount}}$</h2>
+        {% csrf_token %}
+        <input type="text" name="full_name" placeholder="الاسم بالكامل">
+        <input type="email" name="email" placeholder="البريد الالكنروني">
+        <input type="text" name="card_number" placeholder="رقم البطاقة">    
+        <input type="text" name="card_cvc" placeholder="رقم cvc">
+        <input type="text" name="card_exp" placeholder="تاريخ انتهاء البطاقة">
 
         <div class="btns">
-            <a href="#" class="cancel">الغاء</a>
-            <button>تسجيل</button>
+            <a href="?cancel=0" class="cancel">الغاء</a>
+            <button type="submit">تسجيل</button>
         </div>
-    </div>
+
+    </form>
     
     
 </body>

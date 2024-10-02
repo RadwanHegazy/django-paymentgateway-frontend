@@ -20,13 +20,15 @@
             </div>
         </div>
 
-        <div class="btns">
-            <input type="number" placeholder="أدخل المبلغ">
-            <button class="create">انشاء رابط دفع</button>
-            <button class="copy" data-url="URL_HERE" id="copy">نسخ الرابط</button>
+        <form class="btns" method="GET">
+            <input type="number" name="amount" placeholder="أدخل المبلغ">
+            <button type="submit" class="create">انشاء رابط دفع</button>
+            {% for m in  messages %}
+                <button type="button" class="copy" data-url="http://127.0.0.1:8000{% url 'payment' m %}" id="copy">نسخ الرابط</button>
+            {% endfor %}
             <button class="logout" onclick="window.location.href = '/logout/' ">تسجيل الخروج</button>
             
-        </div>
+        </form>
 
         <div class="table">
             <div class="main">
@@ -35,23 +37,31 @@
                 <p>المبلغ</p>
                 <p>تاريخ الدفع</p>
             </div>
-            <div class="info success">
-                <p>رضوان جابر</p>
-                <p>radwan@gmail.com</p>
-                <p>100$</p>
-                <p>22-9-2020</p>
-            </div>
-            <div class="info fail">
-                <p>رضوان جابر</p>
-                <p>radwan@gmail.com</p>
-                <p>100$</p>
-                <p>22-9-2020</p>
-            </div>
             
+            {% for payment in payments %}
+                
+                <div class="info {% if payment.payment_state == 'done' %}success{% else %}fail{% endif %}">
+                    <p>{{payment.full_name}}</p>
+                    <p>{{payment.email}}</p>
+                    <p>{{payment.amount}}$</p>
+                    <p>{{payment.datetime}}</p>
+                </div>
+            {% endfor %}
+
 
         </div>
 
     </div>
 
+
+    <script>
+        var cpyBtn = document.getElementById('copy');
+
+        cpyBtn.addEventListener('click', ()=>{
+            navigator.clipboard.writeText(cpyBtn.dataset.url);
+            alert("تم نسخ الرابط بنجاح");
+        })
+
+    </script>
 </body>
 </html>
